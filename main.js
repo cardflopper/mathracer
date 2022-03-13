@@ -28,7 +28,7 @@ function checkAnswer(answerString){
 		if(myAnswer == correctAnswer)
 			changeEnergy(10);
 		else
-			changeEnergy(-1);	
+			changeEnergy(-5);	
 		document.getElementById('myAnswer').value ="";
 		displayNextProblem(2);
 	}
@@ -36,7 +36,6 @@ function checkAnswer(answerString){
 }
 
 function go(){
-document.getElementById('info').innerHTML = "[mission in progress]";
 clearInterval(myInterval);
 energy=100;
 displayNextProblem(2);
@@ -45,7 +44,7 @@ document.getElementsByTagName('button')[0].classList.add('hidden');
 
 document.getElementById('myAnswer').focus();
 updateEnergyDisplay();
-myInterval = setInterval(() => changeEnergy(-1), 350);
+myInterval = setInterval(() => changeEnergy(-1), 450);
 }
 
 
@@ -86,7 +85,6 @@ function gameOver(){
 clearInterval(myInterval);
 document.getElementById('container').classList.add('hidden');
 document.getElementsByTagName('button')[0].classList.remove('hidden');
-document.getElementById('info').innerHTML = "[hit start to begin]";
 document.getElementById('myAnswer').value = '';
 }
 var a;
