@@ -32,7 +32,6 @@ function checkAnswer(answerString){
 		}
 		else
 			changeEnergy(ENERGY_INCORRECT);	
-		
 		document.getElementById('myAnswer').value ="";
 		
 		//append problem to history
@@ -41,6 +40,7 @@ function checkAnswer(answerString){
 		historyElement.classList.add(historyClass);
 		document.getElementById('history').prepend(historyElement);
 		problemCounter++;
+		
 		displayNextProblem(2);
 	}
 	
@@ -48,8 +48,6 @@ function checkAnswer(answerString){
 
 function go(){
 problemCounter = 1;
-document.getElementById('history').innerHTML = '';
-document.getElementById('info').innerHTML = "[mission in progress]";
 clearInterval(myInterval);
 energy=ENERGY_START;
 displayNextProblem(2);
@@ -58,7 +56,7 @@ document.getElementsByTagName('button')[0].classList.add('hidden');
 
 document.getElementById('myAnswer').focus();
 updateEnergyDisplay();
-myInterval = setInterval(() => changeEnergy(-1), 350);
+myInterval = setInterval(() => changeEnergy(-1), 450);
 }
 
 
@@ -71,7 +69,6 @@ function changeEnergy(amount = 1){
 }
 
 function updateEnergyDisplay(){
-	var energyBar="&nbsp;";
 	var width = energy/100;
 	if(width>1)
 		width='1';
@@ -88,10 +85,13 @@ function updateEnergyDisplay(){
 		status = 'stable';
 	else if (energy>=100)
 		status = 'full';
+/*
+document.getElementById('energyStatus').innerHTML = status + '('+energy+')';
+*/
 	document.getElementById('energyBar').setAttribute('class','');
 	document.getElementById('energyBar').classList.add(status);
-	document.getElementById('energyBar').innerHTML = energyBar;
-	document.getElementById('energyStatus').innerHTML = status + '('+energy+')';
+document.getElementById('energyBar').innerHTML = "&nbsp;";
+	
 		
 }
 
@@ -99,10 +99,9 @@ function gameOver(){
 clearInterval(myInterval);
 document.getElementById('container').classList.add('hidden');
 document.getElementsByTagName('button')[0].classList.remove('hidden');
-document.getElementById('info').innerHTML = "[hit start to begin]";
 document.getElementById('myAnswer').value = '';
-
 }
+
 var a;
 var b;
 var energy = 0;
@@ -111,5 +110,6 @@ var myInterval;
 var ENERGY_CORRECT = 10;
 var ENERGY_INCORRECT = -5;
 var ENERGY_START = 100;
+
 
 

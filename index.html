@@ -8,19 +8,15 @@
 		<link rel="stylesheet" href="style.css"></link>
 	</head>
 	<body>
-	<h1>Add Racer</h1>
-		
-		<div id="info">hit start to begin...</div>
+	<h1>Math Racer</h1>
 		<button onclick="go()">start</button>
 	
 		<div id="container" class="hidden">
-			<div id="energyStatus"></div>
 			<div id="energyBar"></div>	
 			<div class="number" id="a"></div>
 			<div class="number" id="b"></div>
-			<div><input id="myAnswer" pattern="\d*" name="myAnswer" type="number" onkeyup="checkAnswer(this.value);"></input>
+			<div><input id="myAnswer" pattern="[0-9]*" name="myAnswer" type="number" onkeyup="checkAnswer(this.value)"></input>
 				</div>
-			
 		</div>
 		<div id="history"></div>
 		
