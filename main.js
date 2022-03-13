@@ -47,6 +47,7 @@ function checkAnswer(answerString){
 }
 
 function go(){
+document.getElementById('history').innerHTML='';
 problemCounter = 1;
 clearInterval(myInterval);
 energy=ENERGY_START;
