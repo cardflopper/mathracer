@@ -57,13 +57,12 @@ function changeEnergy(amount = 1){
 }
 
 function updateEnergyDisplay(){
-	var energyBar="&nbsp;";
 	var width = energy/100;
 	if(width>1)
 		width='1';
 	width *=100
 	document.getElementById('energyBar').style.width=width.toString()+'%';
-	var status;
+	/*var status;
 	if(energy<25)
 		status = 'critical';
 	else if (energy<50)
@@ -74,10 +73,13 @@ function updateEnergyDisplay(){
 		status = 'stable';
 	else if (energy>=100)
 		status = 'full';
+
+document.getElementById('energyStatus').innerHTML = status + '('+energy+')';
+*/
 	document.getElementById('energyBar').setAttribute('class','');
 	document.getElementById('energyBar').classList.add(status);
-	document.getElementById('energyBar').innerHTML = energyBar;
-	document.getElementById('energyStatus').innerHTML = status + '('+energy+')';
+document.getElementById('energyBar').innerHTML = "&nbsp;";
+	
 		
 }
 
