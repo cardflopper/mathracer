@@ -21,3 +21,6 @@ button{font-size:50;}
 .medium{background-color:yellow;}
 .stable{background-color:green;}
 .full{background-color:blue;}
+
+.correct{color:green;}
+.incorrect{color:red;}

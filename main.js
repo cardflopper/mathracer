@@ -25,19 +25,31 @@ function checkAnswer(answerString){
 	var digits = Math.log(correctAnswer) * Math.LOG10E + 1 | 0;
 
 	if(answerString.length >= digits){
-		if(myAnswer == correctAnswer)
-			changeEnergy(10);
+		var historyClass = 'incorrect';
+		if(myAnswer == correctAnswer){
+			changeEnergy(ENERGY_CORRECT);
+			historyClass = 'correct';
+		}
 		else
-			changeEnergy(-5);	
+			changeEnergy(ENERGY_INCORRECT);	
 		document.getElementById('myAnswer').value ="";
+		
+		//append problem to history
+		var historyElement = document.createElement('div');
+		historyElement.innerHTML = '['+problemCounter+'] '+a +"+"+b+"="+myAnswer;
+		historyElement.classList.add(historyClass);
+		document.getElementById('history').prepend(historyElement);
+		problemCounter++;
+		
 		displayNextProblem(2);
 	}
 	
 }
 
 function go(){
+problemCounter = 1;
 clearInterval(myInterval);
-energy=100;
+energy=ENERGY_START;
 displayNextProblem(2);
 document.getElementById('container').classList.remove('hidden');
 document.getElementsByTagName('button')[0].classList.add('hidden');
@@ -89,10 +101,15 @@ document.getElementById('container').classList.add('hidden');
 document.getElementsByTagName('button')[0].classList.remove('hidden');
 document.getElementById('myAnswer').value = '';
 }
+
 var a;
 var b;
 var energy = 0;
+var problemCounter = 0;
 var myInterval;
+var ENERGY_CORRECT = 10;
+var ENERGY_INCORRECT = -5;
+var ENERGY_START = 100;
 
 
 
