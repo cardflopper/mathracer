@@ -1,0 +1,23 @@
+body{
+	font-family:courier;
+	text-align:center;
+}
+
+.number, input{
+	text-align:center;	
+	width:100%;
+	font-size:60px;
+}
+
+
+#energyBar{text-align:center;display:inline-block;}
+#energyStatus,#info{text-align:center; font-size:30px}
+
+button{font-size:50;}
+.hidden{display:none;}
+
+.critical{background-color:red;}
+.low{background-color:orange;}
+.medium{background-color:yellow;}
+.stable{background-color:green;}
+.full{background-color:blue;}
