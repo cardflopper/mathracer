@@ -11,7 +11,7 @@ body{
 
 
 #energyBar{text-align:center;display:inline-block;}
-#energyStatus{text-align:center; font-size:30px}
+/*#energyStatus{text-align:center; font-size:30px}*/
 
 button{font-size:50;}
 .hidden{display:none;}
