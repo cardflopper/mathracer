@@ -1,12 +1,12 @@
-function generateInteger(digits=1){
-	if (digits<1){
+function generateInteger(digits = 2){
+	if (digits < 1){
 		throw "can't generate integer, bad parameter";
 	}
-	var shift = Math.pow(10,(digits-1));
-	return Math.floor(Math.random()*9*shift+shift);
+	var shift = Math.pow(10, (digits-1));
+	return Math.floor(Math.random()*9*shift + shift);
 }
 
-function displayNextProblem(digits = 2){
+function generateNextProblem(digits = 2){
 
 	try{
 		a = generateInteger(digits);
@@ -14,67 +14,70 @@ function displayNextProblem(digits = 2){
 	}catch(e){
 		console.error(e);
 	}
-	document.getElementById('a').innerHTML = '&nbsp'+a;
-	document.getElementById('b').innerHTML = '+'+b;
+}
+
+function displayNextProblem(){
+	document.getElementById('a').innerHTML = '&nbsp' + a;
+	document.getElementById('b').innerHTML = '+' + b;
 }
 
 function checkAnswer(answerString){
 	var myAnswer = parseInt(answerString);
-	var correctAnswer = a+b;
-	
-	var digits = Math.log(correctAnswer) * Math.LOG10E + 1 | 0;
+	var correctAnswer = a + b;
 
-	if(answerString.length >= digits){
+	var digitsEntered = Math.log(correctAnswer) * Math.LOG10E + 1 | 0;
+
+	if(answerString.length >= digitsEntered){
 		var historyClass = 'incorrect';
 		if(myAnswer == correctAnswer){
 			changeEnergy(ENERGY_CHANGE_CORRECT);
 			historyClass = 'correct';
 		}
 		else
-			changeEnergy(ENERGY_CHANGE_INCORRECT);	
+			changeEnergy(ENERGY_CHANGE_INCORRECT);
+
 		document.getElementById('myAnswer').value ="";
-		
+
 		//append problem to history
 		var historyElement = document.createElement('div');
-		historyElement.innerHTML = '['+problemCounter+'] '+a +"+"+b+"="+myAnswer;
+		historyElement.innerHTML = '[' + problemCounter + '] ' + a + "+" + b + "=" + myAnswer;
 		historyElement.classList.add(historyClass);
 		document.getElementById('history').prepend(historyElement);
-		problemCounter++;
-		
-		displayNextProblem(2);
+		currentProblemCounter++;
+
+		generateNextProblem();
+		displayNextProblem();
 	}
-	
 }
 
 function go(){
-document.getElementById('history').innerHTML='';
-problemCounter = 1;
-clearInterval(myInterval);
-energy=ENERGY_START;
-displayNextProblem(2);
-document.getElementById('container').classList.remove('hidden');
-document.getElementsByTagName('button')[0].classList.add('hidden');
+	document.getElementById('history').innerHTML='';
+	currentProblemCounter = 1;
+	clearInterval(myInterval);
+	energy = ENERGY_START;
+	displayNextProblem(2);
+	document.getElementById('container').classList.remove('hidden');
+	document.getElementsByTagName('button')[0].classList.add('hidden');
 
-document.getElementById('myAnswer').focus();
-updateEnergyDisplay();
-myInterval = setInterval(() => changeEnergy(-2), ENERGY_DEPLETE_SPEED);
+	document.getElementById('myAnswer').focus();
+	updateEnergyDisplay();
+	myInterval = setInterval(() => changeEnergy(-1), ENERGY_DEPLETE_SPEED);
 }
 
 
 function changeEnergy(amount = 1){
 	energy += amount;
 	updateEnergyDisplay();
-	if(energy <= 0){
+	if(energy <= 0)
 		gameOver();
-	}
 }
 
 function updateEnergyDisplay(){
 	var width = energy/100;
-	if(width>1)
-		width='1';
-	width *=100
-	document.getElementById('energyBar').style.width=width.toString()+'%';
+	if(width > 1)
+		width = '1';
+	width *= 100
+	document.getElementById('energyBar').style.width = width.toString()+'%';
 	var status;
 	if(energy<25)
 		status = 'critical';
@@ -86,29 +89,25 @@ function updateEnergyDisplay(){
 		status = 'stable';
 	else if (energy>=100)
 		status = 'full';
-/*
-document.getElementById('energyStatus').innerHTML = status + '('+energy+')';
-*/
+
 	document.getElementById('energyBar').setAttribute('class','');
 	document.getElementById('energyBar').classList.add(status);
-document.getElementById('energyBar').innerHTML = "&nbsp;";
-	
-		
+	document.getElementById('energyBar').innerHTML = "&nbsp;";
 }
 
 function gameOver(){
-clearInterval(myInterval);
-document.getElementById('container').classList.add('hidden');
-document.getElementsByTagName('button')[0].classList.remove('hidden');
-document.getElementById('myAnswer').value = '';
+	clearInterval(myInterval);
+	document.getElementById('container').classList.add('hidden');
+	document.getElementsByTagName('button')[0].classList.remove('hidden');
+	document.getElementById('myAnswer').value = '';
 }
 
 var a;
 var b;
-var energy = 0;
-var problemCounter = 0;
-var myInterval;
-var ENERGY_DEPLETE_SPEED = 450; //millisend
+var energy = 100;
+var currentProblemCounter = 1;
+var myInterval; // keeps track of countdown
+var ENERGY_DEPLETE_SPEED = 400; //millisec, interval between depletions
 var ENERGY_CHANGE_CORRECT = 10;
 var ENERGY_CHANGE_INCORRECT = -5;
 var ENERGY_START = 100;
