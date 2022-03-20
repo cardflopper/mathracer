@@ -27,11 +27,11 @@ function checkAnswer(answerString){
 	if(answerString.length >= digits){
 		var historyClass = 'incorrect';
 		if(myAnswer == correctAnswer){
-			changeEnergy(ENERGY_CORRECT);
+			changeEnergy(ENERGY_CHANGE_CORRECT);
 			historyClass = 'correct';
 		}
 		else
-			changeEnergy(ENERGY_INCORRECT);	
+			changeEnergy(ENERGY_CHANGE_INCORRECT);	
 		document.getElementById('myAnswer').value ="";
 		
 		//append problem to history
@@ -109,8 +109,8 @@ var energy = 0;
 var problemCounter = 0;
 var myInterval;
 var ENERGY_DEPLETE_SPEED = 450; //millisend
-var ENERGY_CORRECT = 10;
-var ENERGY_INCORRECT = -5;
+var ENERGY_CHANGE_CORRECT = 10;
+var ENERGY_CHANGE_INCORRECT = -5;
 var ENERGY_START = 100;
 
 
