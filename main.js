@@ -57,7 +57,7 @@ document.getElementsByTagName('button')[0].classList.add('hidden');
 
 document.getElementById('myAnswer').focus();
 updateEnergyDisplay();
-myInterval = setInterval(() => changeEnergy(-1), 450);
+myInterval = setInterval(() => changeEnergy(-2), ENERGY_DEPLETE_SPEED);
 }
 
 
@@ -108,6 +108,7 @@ var b;
 var energy = 0;
 var problemCounter = 0;
 var myInterval;
+var ENERGY_DEPLETE_SPEED = 450; //millisend
 var ENERGY_CORRECT = 10;
 var ENERGY_INCORRECT = -5;
 var ENERGY_START = 100;
