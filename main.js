@@ -14,17 +14,53 @@ function generateNextProblem(digits = 2){
 	}catch(e){
 		console.error(e);
 	}
+
+	correctAnswer = a+b;
 }
 
 function displayNextProblem(){
 	document.getElementById('a').innerHTML = '&nbsp' + a;
 	document.getElementById('b').innerHTML = '+' + b;
+
+	//pick a random slot to put the correct answer
+	var tmpIndex = Math.floor(Math.random()*5);
+
+	var rangeOfAnswers = [correctAnswer-10,correctAnswer - 8, correctAnswer - 6, correctAnswer - 4, correctAnswer - 2, correctAnswer, correctAnswer + 2, correctAnswer + 4, correctAnswer +6, correctAnswer+8,correctAnswer+10];
+
+	var displayedAnswers = rangeOfAnswers.slice(tmpIndex,tmpIndex+5);
+	correctAnswerIndex = (4-tmpIndex)
+
+	for (var i =0; i<5;i++){
+		document.getElementById('answer_'+i).innerHTML = displayedAnswers[i];
+	}
+
+}
+
+function checkClickedAnswer(index){
+	var historyClass = 'incorrect';
+	if (index == correctAnswerIndex){
+		changeEnergy(ENERGY_CHANGE_CORRECT);
+		historyClass = 'correct';
+	}
+	else
+		changeEnergy(ENERGY_CHANGE_INCORRECT);
+
+	document.getElementById('myAnswer').value ="";
+
+	//append problem to history
+	var historyElement = document.createElement('div');
+	historyElement.innerHTML = '[' + problemCounter + '] ' + a + "+" + b + "=" + document.getElementById('answer_'+index).innerHTML;
+	historyElement.classList.add(historyClass);
+	document.getElementById('history').prepend(historyElement);
+	currentProblemCounter++;
+
+	generateNextProblem();
+	displayNextProblem();
+
 }
 
 function checkAnswer(answerString){
 	var myAnswer = parseInt(answerString);
-	var correctAnswer = a + b;
-
 	var digitsEntered = Math.log(correctAnswer) * Math.LOG10E + 1 | 0;
 
 	if(answerString.length >= digitsEntered){
@@ -104,6 +140,8 @@ function gameOver(){
 
 var a;
 var b;
+var correctAnswer;
+var correctAnswerIndex;
 var energy = 100;
 var currentProblemCounter = 1;
 var myInterval; // keeps track of countdown
