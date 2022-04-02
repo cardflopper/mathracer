@@ -1,3 +1,4 @@
+// test comment delete me later 2022-04-02
 function generateInteger(digits = 2){
 	if (digits < 1){
 		throw "can't generate integer, bad parameter";
