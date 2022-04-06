@@ -55,7 +55,8 @@ function go(){
 	currentProblemCounter = 1;
 	clearInterval(myInterval);
 	energy = ENERGY_START;
-	displayNextProblem(2);
+	generateNextProblem();
+	displayNextProblem();
 	document.getElementById('container').classList.remove('hidden');
 	document.getElementsByTagName('button')[0].classList.add('hidden');
 
