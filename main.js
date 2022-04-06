@@ -40,7 +40,7 @@ function checkAnswer(answerString){
 
 		//append problem to history
 		var historyElement = document.createElement('div');
-		historyElement.innerHTML = '[' + problemCounter + '] ' + a + "+" + b + "=" + myAnswer;
+		historyElement.innerHTML = '[' + currentProblemCounter + '] ' + a + "+" + b + "=" + myAnswer;
 		historyElement.classList.add(historyClass);
 		document.getElementById('history').prepend(historyElement);
 		currentProblemCounter++;
